@@ -7,6 +7,6 @@
 //
 
 public struct StateTypeComparator<S: StateType> {
-    let dummyState: S
-    let comparator: (S, S) -> Bool
+    public let dummyState: S
+    public let comparator: (S, S) -> Bool
 }

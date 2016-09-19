@@ -25,7 +25,7 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
     private lazy var _handlers: [Transition<S> : [_HandlerInfo<S, E>]] = [:]
     
     /// Comparator mappings
-    typealias StateComparatorRouteMapping = (fromState: S, userInfo: Any?) -> [ StateTypeComparator<S> ]?
+    public typealias StateComparatorRouteMapping = (fromState: S, userInfo: Any?) -> [ StateTypeComparator<S> ]?
     private lazy var _comparatorRouteMappings: [String : StateComparatorRouteMapping] = [:]
 
     //--------------------------------------------------
@@ -543,7 +543,7 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
     
     // MARK: Comparator mappings
     
-    func addStateComparatorRouteMapping(comparatorRouteMapping: StateComparatorRouteMapping) -> Disposable {
+    public func addStateComparatorRouteMapping(comparatorRouteMapping: StateComparatorRouteMapping) -> Disposable {
         let key = _createUniqueString()
         
         self._comparatorRouteMappings[key] = comparatorRouteMapping
