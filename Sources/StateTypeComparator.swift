@@ -9,4 +9,8 @@
 public struct StateTypeComparator<S: StateType> {
     public let dummyState: S
     public let comparator: (S, S) -> Bool
+    
+    public init(dummyState: S, comparator: (S, S) -> Bool) {
+        self.init(dummyState: dummyState, comparator: comparator)
+    }
 }
