@@ -23,6 +23,10 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
 
     /// `tryState()`-based handler collection.
     private lazy var _handlers: [Transition<S> : [_HandlerInfo<S, E>]] = [:]
+    
+    /// Comparator mappings
+    typealias StateComparatorRouteMapping = (fromState: S, userInfo: Any?) -> [ StateTypeComparator<S> ]?
+    private lazy var _comparatorRouteMappings: [String : StateComparatorRouteMapping] = [:]
 
     //--------------------------------------------------
     // MARK: - Init
@@ -69,6 +73,15 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
 
         if self._hasRouteMappingInDict(fromState: fromState, toState: toState, userInfo: userInfo) != nil {
             return true
+        }
+        
+        // State type comparators
+        if let comparators = _hasRouteMappingComparatorsInDict(fromState: fromState, toState: toState, userInfo: userInfo) {
+            for comparator in comparators {
+                if comparator.comparator(comparator.dummyState, toState) {
+                    return true
+                }
+            }
         }
 
         // look for all event-based-routes
@@ -515,6 +528,47 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
         else {
             return false
         }
+    }
+    
+    private func _removeComparatorStateRouteMapping(routeMappingID: _RouteMappingID) -> Bool
+    {
+        if self._comparatorRouteMappings[routeMappingID.key] != nil {
+            self._comparatorRouteMappings[routeMappingID.key] = nil
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    // MARK: Comparator mappings
+    
+    func addStateComparatorRouteMapping(comparatorRouteMapping: StateComparatorRouteMapping) -> Disposable {
+        let key = _createUniqueString()
+        
+        self._comparatorRouteMappings[key] = comparatorRouteMapping
+        
+        let routeMappingID = _RouteMappingID(key: key)
+        
+        return ActionDisposable { [weak self] in
+            self?._removeComparatorStateRouteMapping(routeMappingID)
+        }
+    }
+    
+    // MARK: Private
+    
+    private func _hasRouteMappingComparatorsInDict(fromState fromState: S, toState: S, userInfo: Any? = nil) -> [ StateTypeComparator<S> ]?
+    {
+        var comparators = [ StateTypeComparator<S>]()
+        for comparatorMapping in self._comparatorRouteMappings.values {
+            guard let cs = comparatorMapping(fromState: fromState, userInfo: userInfo)
+                where cs.count > 0 else {
+                    break
+            }
+            comparators.appendContentsOf(cs)
+        }
+        
+        return comparators.count > 0 ? comparators : nil
     }
 
 }

@@ -41,6 +41,8 @@
 		4836FF5A1C0EFD700038B7D2 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4836FF591C0EFD700038B7D2 /* StateMachine.swift */; };
 		483F35571C0EB192007C70D7 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F35561C0EB192007C70D7 /* Machine.swift */; };
 		4876510F1C0ECBEB005961AC /* MachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876510E1C0ECBEB005961AC /* MachineTests.swift */; };
+		B631A81D1D90939200214DA4 /* StateTypeComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631A81C1D90939200214DA4 /* StateTypeComparator.swift */; };
+		B631A81F1D90942300214DA4 /* StateTypeComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631A81E1D90942300214DA4 /* StateTypeComparable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,8 @@
 		4836FF591C0EFD700038B7D2 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		483F35561C0EB192007C70D7 /* Machine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		4876510E1C0ECBEB005961AC /* MachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineTests.swift; sourceTree = "<group>"; };
+		B631A81C1D90939200214DA4 /* StateTypeComparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateTypeComparator.swift; sourceTree = "<group>"; };
+		B631A81E1D90942300214DA4 /* StateTypeComparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateTypeComparable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,7 @@
 				483F35561C0EB192007C70D7 /* Machine.swift */,
 				4836FF591C0EFD700038B7D2 /* StateMachine.swift */,
 				1F532C531C12B5BC00D3813A /* Disposable.swift */,
+				B631A8201D9095CA00214DA4 /* Comparator */,
 				1FB1EC88199E4ABC00ABD937 /* Protocols */,
 				1F70FB751BF0FAE800E5AC8C /* Routes */,
 				1F70FB741BF0FAB900E5AC8C /* Internals */,
@@ -253,6 +258,15 @@
 			);
 			name = "project xcconfigs";
 			path = Configurations;
+			sourceTree = "<group>";
+		};
+		B631A8201D9095CA00214DA4 /* Comparator */ = {
+			isa = PBXGroup;
+			children = (
+				B631A81C1D90939200214DA4 /* StateTypeComparator.swift */,
+				B631A81E1D90942300214DA4 /* StateTypeComparable.swift */,
+			);
+			name = Comparator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +392,8 @@
 				1FA620221996606300460108 /* Route.swift in Sources */,
 				1F70FB6F1BF0F59600E5AC8C /* _HandlerID.swift in Sources */,
 				1FA620261996606300460108 /* StateType.swift in Sources */,
+				B631A81F1D90942300214DA4 /* StateTypeComparable.swift in Sources */,
+				B631A81D1D90939200214DA4 /* StateTypeComparator.swift in Sources */,
 				1FA620231996606300460108 /* RouteChain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
