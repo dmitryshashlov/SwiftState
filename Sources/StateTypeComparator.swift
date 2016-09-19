@@ -6,7 +6,7 @@
 //  Copyright © 2016 Dmitry Shashlov. All rights reserved.
 //
 
-struct StateTypeComparator<S: StateType> {
+public struct StateTypeComparator<S: StateType> {
     let dummyState: S
     let comparator: (S, S) -> Bool
 }

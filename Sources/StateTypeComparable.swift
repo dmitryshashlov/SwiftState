@@ -6,16 +6,16 @@
 //  Copyright © 2016 Dmitry Shashlov. All rights reserved.
 //
 
-protocol StateTypeComparable {
+public protocol StateTypeComparable {
     associatedtype SType: StateType
     static func modestComparator() -> (SType, SType) -> Bool
     static func greedyComparator() -> (SType, SType) -> Bool
 }
 
-func ==<S: StateType where S: StateTypeComparable, S.SType == S>(left: S, right: S) -> Bool {
+public func ==<S: StateType where S: StateTypeComparable, S.SType == S>(left: S, right: S) -> Bool {
     return S.modestComparator()(left, right)
 }
 
-func ===<S: StateType where S: StateTypeComparable, S.SType == S>(left: S, right: S) -> Bool {
+public func ===<S: StateType where S: StateTypeComparable, S.SType == S>(left: S, right: S) -> Bool {
     return S.greedyComparator()(left, right)
 }
