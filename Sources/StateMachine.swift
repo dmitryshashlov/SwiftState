@@ -12,7 +12,7 @@
 /// - Note:
 /// Use `NoEvent` type to ignore event-handlings whenever necessary.
 ///
-public final class StateMachine<S: StateType, E: EventType>: Machine<S, E>
+public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
 {
     /// Closure-based routes for `tryState()`.
     /// - Returns: Multiple `toState`s from single `fromState`, similar to `.State0 => [.State1, .State2]`
