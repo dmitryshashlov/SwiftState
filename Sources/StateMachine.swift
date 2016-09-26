@@ -563,7 +563,7 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
         for comparatorMapping in self._comparatorRouteMappings.values {
             guard let cs = comparatorMapping(fromState: fromState, userInfo: userInfo)
                 where cs.count > 0 else {
-                    break
+                    continue
             }
             comparators.appendContentsOf(cs)
         }
