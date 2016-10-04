@@ -11,6 +11,7 @@ public struct StateTypeComparator<S: StateType> {
     public let comparator: (S, S) -> Bool
     
     public init(dummyState: S, comparator: (S, S) -> Bool) {
-        self.init(dummyState: dummyState, comparator: comparator)
+        self.dummyState = dummyState
+        self.comparator = comparator
     }
 }
