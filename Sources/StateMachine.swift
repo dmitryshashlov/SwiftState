@@ -25,7 +25,7 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
     private lazy var _handlers: [Transition<S> : [_HandlerInfo<S, E>]] = [:]
     
     /// Comparator mappings
-    public typealias StateComparatorRouteMapping = (fromState: S, userInfo: Any?) -> [ StateTypeComparator<S> ]?
+    public typealias StateComparatorRouteMapping = (_ fromState: S, _ userInfo: Any?) -> [ StateTypeComparator<S> ]?
     private lazy var _comparatorRouteMappings: [String : StateComparatorRouteMapping] = [:]
 
     //--------------------------------------------------
@@ -561,7 +561,7 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
     
     // MARK: Comparator mappings
     
-    public func addStateComparatorRouteMapping(comparatorRouteMapping: StateComparatorRouteMapping) -> Disposable {
+    public func addStateComparatorRouteMapping(comparatorRouteMapping: @escaping StateComparatorRouteMapping) -> Disposable {
         let key = _createUniqueString()
         
         self._comparatorRouteMappings[key] = comparatorRouteMapping
@@ -569,7 +569,7 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
         let routeMappingID = _RouteMappingID(key: key)
         
         return ActionDisposable { [weak self] in
-            self?._removeComparatorStateRouteMapping(routeMappingID)
+            self?._removeComparatorStateRouteMapping(routeMappingID: routeMappingID)
         }
     }
     
@@ -579,11 +579,11 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
     {
         var comparators = [ StateTypeComparator<S>]()
         for comparatorMapping in self._comparatorRouteMappings.values {
-            guard let cs = comparatorMapping(fromState: fromState, userInfo: userInfo)
-                where cs.count > 0 else {
+            guard let cs = comparatorMapping(fromState, userInfo)
+                , cs.count > 0 else {
                     continue
             }
-            comparators.appendContentsOf(cs)
+            comparators.append(contentsOf: cs)
         }
         
         return comparators.count > 0 ? comparators : nil
