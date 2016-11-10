@@ -561,6 +561,7 @@ public class StateMachine<S: StateType, E: EventType>: Machine<S, E>
     
     // MARK: Comparator mappings
     
+    @discardableResult
     public func addStateComparatorRouteMapping(comparatorRouteMapping: @escaping StateComparatorRouteMapping) -> Disposable {
         let key = _createUniqueString()
         
