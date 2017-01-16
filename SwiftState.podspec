@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name     = 'SwiftState'
-  s.version  = '4.1.0'
+  s.version  = '4.1.1'
   s.license  = { :type => 'MIT' }
   s.homepage = 'https://github.com/ReactKit/SwiftState'
   s.authors  = { 'Yasuhiro Inami' => 'inamiy@gmail.com' }
   s.summary  = 'Elegant state machine for Swift.'
-  s.source   = { :git => 'https://github.com/ReactKit/SwiftState.git', :tag => "#{s.version}" }
+  s.source   = { :git => 'https://github.com/dmitryshashlov/SwiftState.git', :tag => "#{s.version}" }
   s.source_files = 'Sources/**/*.swift'
   s.requires_arc = true
 
