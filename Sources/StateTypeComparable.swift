@@ -12,10 +12,10 @@ public protocol StateTypeComparable {
     static func greedyComparator() -> (SType, SType) -> Bool
 }
 
-public func ==<S: StateType where S: StateTypeComparable, S.SType == S>(left: S, right: S) -> Bool {
+public func ==<S: StateTypeComparable>(left: S.SType, right: S.SType) -> Bool {
     return S.modestComparator()(left, right)
 }
 
-public func ===<S: StateType where S: StateTypeComparable, S.SType == S>(left: S, right: S) -> Bool {
+public func ===<S: StateTypeComparable>(left: S.SType, right: S.SType) -> Bool {
     return S.greedyComparator()(left, right)
 }
