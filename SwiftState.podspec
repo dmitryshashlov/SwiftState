@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'SwiftState'
-  s.version  = '4.1.1-cocore'
+  s.version  = '4.1.2-cocore'
   s.license  = { :type => 'MIT' }
   s.homepage = 'https://github.com/ReactKit/SwiftState'
   s.authors  = { 'Yasuhiro Inami' => 'inamiy@gmail.com' }
@@ -11,6 +11,4 @@ Pod::Spec.new do |s|
 
   s.osx.deployment_target = '10.9'
   s.ios.deployment_target = '8.0'
-  s.watchos.deployment_target = '2.0'
-  s.tvos.deployment_target = '9.0'
 end
